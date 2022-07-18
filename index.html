@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+
+        <link rel="stylesheet" href="./style.css">
+
+        <title>Bello Shop</title>
+    </head>
+    <body id="body">
+
+        <nav class="mainNavbar">
+
+            <div class="navMainLeftWrapper">
+
+                <a href=""><img src="./Images/BelloShop.png" alt="shopLogo"></a>
+
+                <!-- <form action="" class="navSearchForm">
+                    <input type="search" name="searchBar" class="navSearch" placeholder="Cerca prodotto o categoria">
+                    <button id="navSearchBtn" type="submit"><img src="./Images/search.svg" alt=""></button>
+                </form> -->
+
+            </div>
+
+            <div class="sidebarBtnContainer">
+
+                <button id="openSidebarBtn">☰</button>
+
+            </div>
+
+        </nav>
+
+        <section class="mainSidebar">
+
+            <button id="closeSidebarBtn">>></button>
+
+            <div class="categoriesMain">
+
+                <div class="sidebarTitle">
+
+                    <h3>➤</h3>
+                    <h3>Categorie</h3>
+
+                </div>
+
+                <ul class="categoriesList">
+                </ul>
+
+            </div>
+
+            <div class="loginMain">
+
+                <div class="sidebarTitle">
+                    <h3>➤</h3>
+                    <h3>Login</h3>
+                </div>
+
+                <form action="" class="loginForm">
+
+                    <input type="text" id="loginUsername" class="loginText" placeholder="Email/username">
+                    <input type="text" id="loginPassword" class="loginText" placeholder="Password">
+
+                    <div class="loginBtnWrapper">
+
+                        <button type="submit" id="submitFormBtn" class="mainLoginBtn">Login</button>
+                        <button id="registerBtn" class="mainLoginBtn">Registrati</button>
+                        
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <main class="mainContent">
+
+            <div class="loaderContainer"><img class="loader" src="./Images/loader.svg" alt="loader"></div>
+
+        </main>
+
+        <script src="./script.js"></script>
+
+    </body>
+
+</html>
