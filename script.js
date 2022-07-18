@@ -91,7 +91,7 @@ $categoriesList.addEventListener("click", function(event) {
                 <img src="${element.image}">
                 <h3>${element.title}</h3>
                 <h4>${element.price}€</h4>
-                <button class="Aggiungi al carrello">add2Cart</button>
+                <button class="add2CartBtn">Aggiungi al carrello</button>
                 </div>
             `);
         });
