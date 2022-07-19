@@ -62,13 +62,14 @@ fetch("https://fakestoreapi.com/products")
 });
 const storedProducts = JSON.parse(localStorage.getItem("productList"));
 
-storedProducts.forEach(element => {
+storedProducts.forEach(product => {
     productListDisplay.push(`
-        <div id="${element.category}" class="productCard">
-            <img src="${element.image}">
-            <h3>${element.title}</h3>
-            <h4>${element.price}€</h4>
-            <button class="add2CartBtn">Aggiungi al carrello</button>
+        <div id="${product.category}" class="productCard">
+            <img src="${product.image}">
+            <h3>${product.title}</h3>
+            <h4>${product.price}€</h4>
+            <h4>${product.id}</h4>
+            <button id="${product.id}" class="add2CartBtn">Aggiungi al carrello - ${product.id}</button>
         </div>
     `);
 });
@@ -81,17 +82,18 @@ $mainContent.innerHTML = productListDisplay.join("");
 //Sorting prodotti per categoria --------------------------------------------------------//
 $categoriesList.addEventListener("click", function(event) {
     if(event.target.tagName === "BUTTON") {
-        const getProductsByCategory = storedProducts.filter(element => element.category === event.target.id);
+        const getProductsByCategory = storedProducts.filter(product => product.category === event.target.id);
         
         productListDisplay = [];
 
-        getProductsByCategory.forEach(element => {
+        getProductsByCategory.forEach(product => {
             productListDisplay.push(`
-            <div id="${element.category}" class="productCard">
-                <img src="${element.image}">
-                <h3>${element.title}</h3>
-                <h4>${element.price}€</h4>
-                <button class="add2CartBtn">Aggiungi al carrello</button>
+            <div id="${product.category}" class="productCard">
+                <img src="${product.image}">
+                <h3>${product.title}</h3>
+                <h4>${product.price}€</h4>
+                <h4>${product.id}</h4>
+                <button id="${product.id} class="add2CartBtn">Aggiungi al carrello - ${product.id}</button>
                 </div>
             `);
         });
@@ -106,7 +108,18 @@ $categoriesList.addEventListener("click", function(event) {
 $mainContent.addEventListener("click", function(event) {
 
     if(event.target.className === "add2CartBtn") {
-        console.log("add2Cart");
+        // storedProducts.filter(product => product.id === event.target.id);
+
+        console.log(storedProducts);
+
+        const putProductInCart = () => {
+            if(storedProducts.value.id === event.target.id) {
+                shopCart.push()
+            }
+        };
+
+        console.log(putProductInCart);
+
     };
 });
 //---------------------------------------------------------------------------------------//
