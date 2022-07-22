@@ -83,7 +83,7 @@ $mainContent.innerHTML = productListDisplay.join("");
 $categoriesList.addEventListener("click", function(event) {
     if(event.target.tagName === "BUTTON") {
         const getProductsByCategory = storedProducts.filter(product => product.category === event.target.id);
-        
+        console.log(getProductsByCategory);
         productListDisplay = [];
 
         getProductsByCategory.forEach(product => {
@@ -108,17 +108,8 @@ $categoriesList.addEventListener("click", function(event) {
 $mainContent.addEventListener("click", function(event) {
 
     if(event.target.className === "add2CartBtn") {
-        // storedProducts.filter(product => product.id === event.target.id);
-
-        console.log(storedProducts);
-
-        const putProductInCart = () => {
-            if(storedProducts.value.id === event.target.id) {
-                shopCart.push()
-            }
-        };
-
-        console.log(putProductInCart);
+        const filtered = storedProducts.filter(product => product.id !== event.target.id);
+        console.log(filtered);
 
     };
 });
