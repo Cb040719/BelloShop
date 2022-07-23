@@ -20,13 +20,17 @@ let shopCart = [];
 //---------------------------------------------------------------------------------------//
 
 
+
+
+
+
 (function() {  //Sidebar a comparsa
 
     $openSidebarBtn.addEventListener("click", function() {
         $sidebar.style.width = "250px";
         $body.style.marginRight = "250px";
     });
-
+    
     $closeSidebarBtn.addEventListener("click", function() {
         $sidebar.style.width = "0";
         $body.style.marginRight = "0";
@@ -34,12 +38,14 @@ let shopCart = [];
 })();
 
 (function() { //Apertura e chiusura Carrello
-
+    
     $showCartBtn.addEventListener("click", function() {
         $shopCart.style.display = "flex";
         $shopCart.style.height = "100%";
+        $sidebar.style.width = "0";
+        $body.style.marginRight = "0";
     });
-
+    
     $closeCartBtn.addEventListener("click", function() {
         $shopCart.style.height = "0";
         $shopCart.style.display = "none";
@@ -73,6 +79,8 @@ fetch("https://fakestoreapi.com/products")
     // console.log(productList);
     localStorage.setItem("productList", JSON.stringify(productList));
 });
+
+
 const storedProducts = JSON.parse(localStorage.getItem("productList"));
 
 storedProducts.forEach(product => {
