@@ -5,17 +5,32 @@
 * {
     transition: all 0.35s;
     box-sizing: border-box;
+    flex-wrap: wrap;
 }
 
 body {
     margin: 0;
+    padding: 10px;
     color: white;
     font-family: "Dosis", sans-serif;
+    background: linear-gradient(143deg, rgba(255,255,255,1) 0%, rgba(207,230,223,1) 10%, rgba(164,207,195,1) 20%, rgba(86,167,145,1) 30%, rgba(34,140,111,1) 40%, rgba(23,113,93,1) 50%, rgba(12,109,121,1) 60%, rgba(36,135,120,1) 70%, rgba(38,127,133,1) 80%, rgba(49,87,198,1) 90%, rgba(49,87,198,1) 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
+    text-align: center;
+}
+
+p{
+    margin: 0;
+    padding: 0;
+}
+
+button {
 }
 
 .loader{
@@ -34,7 +49,13 @@ p, h1, h2, h3, h4, h5, h6 {
     padding: 10px 10px 12px 10px;
     display: flex;
     justify-content: space-between;
-    background: #245265;
+    /* background: #245265; */
+    /* background: #634645; */
+    background: url("./Images/back5.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.507);
+    border-radius: 10px;
 }
 
 .navMainLeftWrapper {
@@ -78,11 +99,23 @@ p, h1, h2, h3, h4, h5, h6 {
     width: 24px;
 } */
 
+#showCartBtn{
+    padding: 0;
+    background: none;
+    border: 0;
+}
+
+#showCartBtn img{
+    height: 35px;
+    width: 35px;
+}
+
 #openSidebarBtn {
     color: white;
     border: 0;
     background: transparent;
     font-size: 30px;
+    padding: 0;
 }
 
 #openSidebarBtn:hover {
@@ -93,6 +126,7 @@ p, h1, h2, h3, h4, h5, h6 {
 .sidebarBtnContainer {
     display: flex;
     align-items: center;
+    gap: 25px;
 }
 
 .mainSidebar {
@@ -148,6 +182,7 @@ p, h1, h2, h3, h4, h5, h6 {
     overflow: hidden;
     position: relative;
     left: 40px;
+    flex-wrap: nowrap;
 }
 
 .categoriesList button {
@@ -212,20 +247,23 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .mainContent {
-    padding: 10px;
-    color: black;
-    display: grid;
+    /* display: grid;
     grid-template-columns: 300px 300px 300px 300px;
-    /* grid-template-rows: 300px 300px 300px 300px 300px; */
+    grid-template-rows: 300px 300px 300px 300px 300px; */
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0 0 0;
+    color: black;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     gap: 15px;
+    
 }
 
-
-.mainContent img {
+.productCard img {
     height: 100px;
     width: 100px;
+    border-radius: 5px;
 }
 
 .productCard{
@@ -233,13 +271,12 @@ p, h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     align-items: center;
     border-radius: 10px;
-    box-shadow: 0 0 5px;
+    box-shadow: 0 0 4px;
     padding: 10px;
     background: white;
-    gap: 20px;
-    /* height: 300px; */
-    flex-wrap: wrap;
-
+    /* backdrop-filter: blur(10px); */
+    gap: 10px;
+    width: 300px;
 }
 
 .cardBtnContainer {
@@ -260,7 +297,7 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 .productCard h3, .productCard h4 {
-    text-align: center;
+    font-weight: 600;
 }
 
 .descriptionContainer {
@@ -276,26 +313,176 @@ p, h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
 }
 
-#add2CartBtn {
-    padding: 5px;
+.add2CartBtn {
+    padding: 2px 5px 5px 5px;
     border-radius: 5px;
     border: 0;
     color: white;
-    text-shadow: 0 0 4px black;
-    background: #f68b41;
-    box-shadow: 1px 2px 6px black;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.555);
+    background: #254346;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.699);
+    font-family: "Dosis", sans-serif;
 }
 
 #productInfoBtn:active {
     box-shadow: inset 0 0 6px black;
 }
 
-#add2CartBtn:active {
+.add2CartBtn:active {
     box-shadow: inset 0 0 6px black;
 }
 
 .productCard:hover {
     transform: scale(1.05);
+}
+
+.shopCart {
+    position: fixed;
+    color: black;
+    background: url("./Images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 0;
+    left: 0;
+    top: 0;
+    overflow-y: scroll;
+    padding: 20px;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.cartItem {
+    display: flex;
+    background-color: white;
+    padding: 10px;
+    gap: 20px;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    max-width: 700px;
+}
+
+.topCartContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.bottomCartContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.bottomCartContainer h3, .bottomCartContainer h4 {
+    text-align: left;
+}
+
+.cartItem img {
+    height: 100px;
+    width: 100px;
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cartItem button {
+    border: 0;
+    background: transparent;
+    color: red;
+    font-size: 15px;
+    font-weight: 900;
+    font-family: "Dosis", sans-serif;
+    width: fit-content;
+    padding: 0;
+}
+
+.productSection {
+    padding: 20px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: fit-content;
+}
+
+.checkOutSection {
+    width: fit-content;
+    position: fixed;
+    right: 70px;
+    top: 70px;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.541);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    color: white;
+}
+
+#closeCartBtn {
+    background: none;
+    border: none;
+    color: lightseagreen;
+    font-weight: 900;
+    font-size: 20px;
+    font-family: "Dosis", sans-serif;
+    width: fit-content;
+}
+
+.checkOutSection h1 {
+    font-size: 35px;
+    font-weight: 500;
+}
+
+.form_container{
+    border: 0;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+}
+
+.form_container input{
+    border-radius: 6px;
+    padding: 5px;
+    border: 1px grey;
+    box-shadow: 0 0 3px rgb(0, 0, 0);
+
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* .form input{
+    padding: 5px;
+    border-radius: 6px;
+} */
+
+.row{
+    display: flex;
+    gap: 10px;
+}
+
+.sub_button{
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 3px rgb(0, 0, 0);
+    margin-top: 10px;
+}
+
+.sub_button:hover{
+    background-color: rgb(41, 151, 78);
+}
+
+.sub_button:active{
+    box-shadow: inset 0 0 3px black;
+
 }
 
 
@@ -327,10 +514,8 @@ p, h1, h2, h3, h4, h5, h6 {
     }
 
     .mainContent {
-        display: grid;
-        grid-template-columns: auto;
+        display: flex;
         align-content: center;
-        /* width: 353px; */
         overflow: scroll;
     }
 

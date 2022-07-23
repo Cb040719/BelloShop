@@ -1,24 +1,22 @@
-//Oggetti DOM ---------------------------------------------------------------------------//
+//Elementi DOM ---------------------------------------------------------------------------//
 const $body = document.querySelector("body");
 const $sidebar = document.querySelector(".mainSidebar");
 const $openSidebarBtn = document.querySelector("#openSidebarBtn");
 const $closeSidebarBtn = document.querySelector("#closeSidebarBtn");
 const $categoriesList = document.querySelector(".categoriesList");
 const $mainContent = document.querySelector(".mainContent");
+const $shopCart = document.querySelector(".shopCart");
+const $cartProductSection = document.querySelector(".productSection")
+const $showCartBtn = document.querySelector("#showCartBtn");
+const $closeCartBtn = document.querySelector("#closeCartBtn");
 const $loader = document.querySelector(".loader");
 
-//Oggetti DOM dinamici ------------------------------------------------------------------//
-const $productCard = document.querySelector(".productCard");
-const $add2CartBtn = document.querySelector(".add2cartBtn");
-
-//Dichiarazione Array 
+//Dichiarazione Array -------------------------------------------------------------------//
 let productList = [];
 let categoriesList = [];
 let productListDisplay = [];
 let categoriesListDisplay = [];
 let shopCart = [];
-
-
 //---------------------------------------------------------------------------------------//
 
 
@@ -27,12 +25,25 @@ let shopCart = [];
     $openSidebarBtn.addEventListener("click", function() {
         $sidebar.style.width = "250px";
         $body.style.marginRight = "250px";
-    })
+    });
 
     $closeSidebarBtn.addEventListener("click", function() {
         $sidebar.style.width = "0";
         $body.style.marginRight = "0";
-    })
+    });
+})();
+
+(function() { //Apertura e chiusura Carrello
+
+    $showCartBtn.addEventListener("click", function() {
+        $shopCart.style.display = "flex";
+        $shopCart.style.height = "100%";
+    });
+
+    $closeCartBtn.addEventListener("click", function() {
+        $shopCart.style.height = "0";
+        $shopCart.style.display = "none";
+    });
 })();
 
 
@@ -70,8 +81,7 @@ storedProducts.forEach(product => {
             <img src="${product.image}">
             <h3>${product.title}</h3>
             <h4>${product.price}€</h4>
-            <h4>${product.id}</h4>
-            <button id="${product.id}" class="add2CartBtn">Aggiungi al carrello - ${product.id}</button>
+            <button id="${product.id}" class="add2CartBtn">Aggiungi al carrello</button>
         </div>
     `);
 });
@@ -94,8 +104,7 @@ $categoriesList.addEventListener("click", function(event) {
                 <img src="${product.image}">
                 <h3>${product.title}</h3>
                 <h4>${product.price}€</h4>
-                <h4>${product.id}</h4>
-                <button id="${product.id}" class="add2CartBtn">Aggiungi al carrello - ${product.id}</button>
+                <button id="${product.id}" class="add2CartBtn">Aggiungi al carrello</button>
                 </div>
             `);
         });
@@ -110,11 +119,28 @@ $categoriesList.addEventListener("click", function(event) {
 $mainContent.addEventListener("click", function(event) {
 
     if(event.target.className === "add2CartBtn") {
-    //    console.log(event.target.id)
-
-       console.log(storedProducts[event.target.id-1])
-       shopCart.push(storedProducts[event.target.id-1])
-       console.log(shopCart)
+    //    console.log(storedProducts[event.target.id-1])
+        shopCart.push(storedProducts[event.target.id-1])
+        console.log(shopCart);
+ 
+        productListDisplay = []
+        shopCart.forEach(product => {
+            productListDisplay.push(`
+                <div class="cartItem">
+                    <img src="${product.image}">
+                    <div class="topCartContainer">
+                        <div class="bottomCartContainer">
+                            <h3>${product.title}</h3>
+                            <h4>${product.price}€</h4>
+                        </div>
+                        <div class="btnContainer">
+                            <button id="${product.id}" class="removeFromCartBtn">X Rimuovi</button>
+                        </div>
+                    </div>
+                </div>
+            `)
+        });
+        $cartProductSection.innerHTML = productListDisplay.join("");
     };
 });
 //---------------------------------------------------------------------------------------//
