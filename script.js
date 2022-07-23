@@ -9,7 +9,7 @@ const $loader = document.querySelector(".loader");
 
 //Oggetti DOM dinamici ------------------------------------------------------------------//
 const $productCard = document.querySelector(".productCard");
-const $add2CartBtn = document.querySelectorAll(".add2cartBtn");
+const $add2CartBtn = document.querySelector(".add2cartBtn");
 
 //Dichiarazione Array 
 let productList = [];
@@ -17,6 +17,8 @@ let categoriesList = [];
 let productListDisplay = [];
 let categoriesListDisplay = [];
 let shopCart = [];
+
+
 //---------------------------------------------------------------------------------------//
 
 
@@ -93,7 +95,7 @@ $categoriesList.addEventListener("click", function(event) {
                 <h3>${product.title}</h3>
                 <h4>${product.price}€</h4>
                 <h4>${product.id}</h4>
-                <button id="${product.id} class="add2CartBtn">Aggiungi al carrello - ${product.id}</button>
+                <button id="${product.id}" class="add2CartBtn">Aggiungi al carrello - ${product.id}</button>
                 </div>
             `);
         });
@@ -108,9 +110,11 @@ $categoriesList.addEventListener("click", function(event) {
 $mainContent.addEventListener("click", function(event) {
 
     if(event.target.className === "add2CartBtn") {
-        const filtered = storedProducts.filter(product => product.id !== event.target.id);
-        console.log(filtered);
+    //    console.log(event.target.id)
 
+       console.log(storedProducts[event.target.id-1])
+       shopCart.push(storedProducts[event.target.id-1])
+       console.log(shopCart)
     };
 });
 //---------------------------------------------------------------------------------------//
