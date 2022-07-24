@@ -1,4 +1,5 @@
 //Elementi DOM ---------------------------------------------------------------------------//
+
 const $body = document.querySelector("body");
 const $sidebar = document.querySelector(".mainSidebar");
 const $openSidebarBtn = document.querySelector("#openSidebarBtn");
@@ -7,21 +8,20 @@ const $categoriesList = document.querySelector(".categoriesList");
 const $mainContent = document.querySelector(".mainContent");
 const $shopCart = document.querySelector(".shopCart");
 const $cartProductSection = document.querySelector(".productSection")
+const $paymentSection = document.querySelector("paymentSection");
 const $showCartBtn = document.querySelector("#showCartBtn");
 const $closeCartBtn = document.querySelector("#closeCartBtn");
 const $loader = document.querySelector(".loader");
 
 //Dichiarazione Array -------------------------------------------------------------------//
+
 let productList = [];
 let categoriesList = [];
 let productListDisplay = [];
 let categoriesListDisplay = [];
 let shopCart = [];
+
 //---------------------------------------------------------------------------------------//
-
-
-
-
 
 
 (function() {  //Sidebar a comparsa
@@ -40,7 +40,7 @@ let shopCart = [];
 (function() { //Apertura e chiusura Carrello
     
     $showCartBtn.addEventListener("click", function() {
-        $shopCart.style.display = "flex";
+        $shopCart.style.display = "grid";
         $shopCart.style.height = "100%";
         $sidebar.style.width = "0";
         $body.style.marginRight = "0";
@@ -52,9 +52,55 @@ let shopCart = [];
     });
 })();
 
+(function() { //Bottone add2cart
+
+    $mainContent.addEventListener("click", function(event) {
+
+        if(event.target.className === "add2CartBtn") {
+        //    console.log(storedProducts[event.target.id-1])
+            shopCart.push(storedProducts[event.target.id-1])
+            console.log(shopCart);
+     
+            productListDisplay = []
+            shopCart.forEach(product => {
+                productListDisplay.push(`
+                    <div class="cartItem">
+                        <img src="${product.image}">
+                        <div class="topCartContainer">
+                            <div class="bottomCartContainer">
+                                <h3>${product.title}</h3>
+                                <h4>${product.price}€</h4>
+                            </div>
+                            <div class="btnContainer">
+                                <button id="${product.id}" class="removeFromCartBtn">X Rimuovi</button>
+                            </div>
+                        </div>
+                    </div>
+                `)
+            });
+            $cartProductSection.innerHTML = productListDisplay.join("");
+        };
+    });
+})();
+
+(function() { //Bottone removeFromCart
+
+    $cartProductSection.addEventListener("click", function(event) {
+        const deleteButton = event.target;
+
+        if(deleteButton.className === "removeFromCartBtn") {
+            const targetProduct = deleteButton.closest(".cartItem");
+
+            if(targetProduct) {
+                targetProduct.remove();
+            };
+        };
+    });
+})();
 
 
 //Lista categorie (sidebar) -------------------------------------------------------------//
+
 fetch("https://fakestoreapi.com/products/categories")
 .then(response => response.json())
 .then(json => categoriesList.push(...json))
@@ -68,10 +114,12 @@ storedCategories.forEach(element => {
     categoriesListDisplay.push(`<li><button id="${element}">${element}</button></li>`);
 });
 $categoriesList.innerHTML = categoriesListDisplay.join("");
+
 //---------------------------------------------------------------------------------------//
 
 
 //Lista prodotti (main content) ---------------------------------------------------------//
+
 fetch("https://fakestoreapi.com/products")
 .then(response => response.json())
 .then(json => productList.push(...json))
@@ -94,12 +142,15 @@ storedProducts.forEach(product => {
     `);
 });
 $mainContent.innerHTML = productListDisplay.join("");
+
 //---------------------------------------------------------------------------------------//
 // console.log(storedCategories);
 // console.log(storedProducts);
 //---------------------------------------------------------------------------------------//
 
+
 //Sorting prodotti per categoria --------------------------------------------------------//
+
 $categoriesList.addEventListener("click", function(event) {
     if(event.target.tagName === "BUTTON") {
         const getProductsByCategory = storedProducts.filter(product => product.category === event.target.id);
@@ -120,35 +171,11 @@ $categoriesList.addEventListener("click", function(event) {
         // console.log(productListDisplay);
     };
 });
+
 //---------------------------------------------------------------------------------------//
 
 //Carrello ------------------------------------------------------------------------------//
 
-$mainContent.addEventListener("click", function(event) {
 
-    if(event.target.className === "add2CartBtn") {
-    //    console.log(storedProducts[event.target.id-1])
-        shopCart.push(storedProducts[event.target.id-1])
-        console.log(shopCart);
- 
-        productListDisplay = []
-        shopCart.forEach(product => {
-            productListDisplay.push(`
-                <div class="cartItem">
-                    <img src="${product.image}">
-                    <div class="topCartContainer">
-                        <div class="bottomCartContainer">
-                            <h3>${product.title}</h3>
-                            <h4>${product.price}€</h4>
-                        </div>
-                        <div class="btnContainer">
-                            <button id="${product.id}" class="removeFromCartBtn">X Rimuovi</button>
-                        </div>
-                    </div>
-                </div>
-            `)
-        });
-        $cartProductSection.innerHTML = productListDisplay.join("");
-    };
-});
+
 //---------------------------------------------------------------------------------------//
