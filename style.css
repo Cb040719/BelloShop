@@ -349,7 +349,7 @@ p{
     grid-template-columns: 50% 50%;
     flex-direction: column;
     justify-content: space-between;
-    gap: 100px;
+    gap: 200px;
 }
 
 .cartItem {
@@ -491,6 +491,10 @@ p{
 
 @media only screen and (max-width:400px) {
 
+    * {
+        flex-wrap: nowrap;
+    }
+
     body {
         width: 100vw;
         display: flex;
@@ -519,8 +523,25 @@ p{
         gap: 10px;
     }    
 
+    .mainSidebar {
+        background: transparent;
+        backdrop-filter: blur(18px);
+        box-shadow: 0 0 4px black;
+        /* color: #012c32; */
+    }
+
+    .mainSidebar button{
+        /* color: #001e22; */
+        font-weight: 600;
+    }
+
+    #closeSidebarBtn {
+        /* color: #111; */
+    }
+
     .mainContent {
         display: flex;
+        flex-direction: column;
         align-content: center;
         overflow: scroll;
         justify-content: space-evenly;
@@ -545,5 +566,29 @@ p{
 
     #closeCartBtn::after {
         content:"  - scorri per il pagamento - >";
+    }
+
+    .shopCart {
+        display: flex;
+        flex-direction: row;
+        gap: 400px;
+    }
+
+    .shopItem {
+        width: 500px;
+    }
+
+    .checkOutSection {
+        width: 90vw;
+        position: relative;
+        right: 160px;
+    }
+
+    .form_container{
+        padding: 7px;
+    }
+    
+    #name, #surname, #username, #password {
+        width: 48.2%;
     }
 }
